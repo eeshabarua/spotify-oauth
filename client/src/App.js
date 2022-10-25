@@ -5,7 +5,7 @@ import "./App.css";
 
 function App() {
   const [data, setData] = React.useState(null);
-  const [url, setUrl] = React.useState(null);
+  const [url, setUrl] = React.useState("");
 
   React.useEffect(() => {
     fetch("/api")
@@ -25,12 +25,11 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>{!data ? "Loading..." : data}</p>
 
-        {!url ? (
+        {url.length === 0 ? <p>Loading...</p> : <p>{url}</p>}
+        {url.length === 0 ? (
           <p>Loading...</p>
         ) : (
-          <Button color="success" variant="contained" href={url} size="large">
-            Login to Spotify
-          </Button>
+          <a href={url}> Login to Spotify</a>
         )}
       </header>
     </div>

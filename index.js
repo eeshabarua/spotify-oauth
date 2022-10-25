@@ -25,6 +25,16 @@ app.get("/login", (req, res) => {
   res.json({ message: html + "&show_dialog=true" });
 });
 
+app.get("/home", async (req, res) => {
+  try {
+    var result = await spotifyApi.getUserPlaylists();
+    console.log(result.body);
+    res.status(200).send(result.body);
+  } catch (err) {
+    res.status(400).send(err);
+  }
+});
+
 app.get("/callback", async (req, res) => {
   const { code } = req.query;
   console.log(code);
